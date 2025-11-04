@@ -1,8 +1,4 @@
-# Web framework
-streamlit==1.26.0
+streamlit
+requests
+pandas
 
-# API requests
-requests==2.31.0
-
-# Data processing
-pandas==2.1.0

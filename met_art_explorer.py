@@ -24,8 +24,13 @@ All data is sourced from the [MET Museum Open API](https://metmuseum.org/).
 # ====== USER INPUT ======
 keyword = st.text_input("Enter keyword(s) to search artworks:", "flower")
 art_type = st.selectbox("Filter by type (optional):", ["All", "Painting", "Sculpture", "Drawing", "Print"])
-nationality = st.text_input("Filter by artist nationality (optional, e.g., 'American'):", "")
 date_range = st.slider("Select creation period (year):", 1000, 2025, (1800, 2000))
+
+# ====== ARTIST NATIONALITY SELECT ======
+# 这里列出一些常见国籍，或者你可以自己扩展
+nationality_options = ["All", "American", "French", "Italian", "Chinese", "Japanese", "Dutch", "British", "German", "Spanish"]
+selected_nationality = st.selectbox("Filter by artist nationality:", nationality_options)
+
 search_button = st.button("Search")
 
 if search_button and keyword:
@@ -70,8 +75,8 @@ if search_button and keyword:
                 pass
 
             # Filter by nationality
-            if nationality:
-                if nationality.lower() not in obj_data.get("artistNationality", "").lower():
+            if selected_nationality != "All":
+                if selected_nationality.lower() not in obj_data.get("artistNationality", "").lower():
                     continue
 
             artworks.append({
